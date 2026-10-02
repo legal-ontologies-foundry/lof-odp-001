@@ -1,0 +1,79 @@
+Prefix(:=<https://w3id.org/lof/ODP001_>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+Prefix(dcterms:=<http://purl.org/dc/terms/>)
+Prefix(skos:=<http://www.w3.org/2004/02/skos/core#>)
+Prefix(obo:=<http://purl.obolibrary.org/obo/>)
+
+# EDITORS' FILE. Edit this file in Protégé; never edit the release files.
+# Term IRIs: https://w3id.org/lof/ODP001_nnnnnnn (see lof-odp-001-idranges.owl)
+
+Ontology(<https://w3id.org/lof/odp-001.owl>
+Import(<https://w3id.org/lof/odp-001/imports/bfo_import.owl>)
+Annotation(dcterms:title "LOF-ODP-001: Legal Act and Legal Document"@en)
+Annotation(dcterms:description "Ontology design pattern distinguishing three entities that legal information systems routinely conflate: the legal act (a process), the legal content it establishes (a generically dependent continuant), and the legal documents that carry that content (material entities). DRAFT for review by the LOF founding coordinators."@en)
+Annotation(dcterms:license <https://creativecommons.org/licenses/by/4.0/>)
+Annotation(dcterms:creator "David R. Koepsell")
+
+# ---------------------------------------------------------------- classes
+
+Declaration(Class(:0001000))
+AnnotationAssertion(rdfs:label :0001000 "legal act"@en)
+AnnotationAssertion(skos:definition :0001000 "A process, having one or more persons or organizations as participants, that a legal system recognizes as bringing into being, modifying, or terminating legally significant entities."@en)
+AnnotationAssertion(rdfs:comment :0001000 "BFO placement (LOF-P-004): a legal act unfolds in time and has temporal parts (offer and acceptance, the stages of a legislative vote), so it is a process. It is distinguished from the content it establishes, which outlives it."@en)
+AnnotationAssertion(skos:example :0001000 "the signing of a residential lease; the enactment of a statute; the delivery of a judgment"@en)
+SubClassOf(:0001000 obo:BFO_0000015)
+SubClassOf(:0001000 ObjectSomeValuesFrom(obo:BFO_0000057 obo:BFO_0000040))
+
+Declaration(Class(:0001001))
+AnnotationAssertion(rdfs:label :0001001 "legal content"@en)
+AnnotationAssertion(skos:definition :0001001 "A generically dependent continuant that is established by some legal act and that specifies legally significant entities, such as the provisions of a statute, the terms of a contract, or the holding of a judgment."@en)
+AnnotationAssertion(rdfs:comment :0001001 "BFO placement (LOF-P-004): the same statute or contract term can be concretized in many copies and survives the destruction of any one of them. That is the mark of a generically dependent continuant. Legal content corresponds to the Work and Expression levels in FRBR-based legal standards."@en)
+AnnotationAssertion(skos:altLabel :0001001 "legal information content"@en)
+AnnotationAssertion(skos:closeMatch :0001001 obo:IAO_0000030)
+SubClassOf(:0001001 obo:BFO_0000031)
+
+Declaration(Class(:0001002))
+AnnotationAssertion(rdfs:label :0001002 "legal document"@en)
+AnnotationAssertion(skos:definition :0001002 "A material entity that is the carrier of some legal content."@en)
+AnnotationAssertion(rdfs:comment :0001002 "BFO placement (LOF-P-004): the particular signed paper, or the particular stored file, is a material entity that carries the content. Digital documents are treated as patterns in material storage media. Note that IAO's 'document' is an information content entity, so it corresponds to legal content here, not to legal document. Legal document corresponds to the Item level in FRBR-based legal standards."@en)
+SubClassOf(:0001002 obo:BFO_0000040)
+SubClassOf(:0001002 ObjectSomeValuesFrom(obo:BFO_0000101 :0001001))
+
+Declaration(Class(:0001003))
+AnnotationAssertion(rdfs:label :0001003 "enactment"@en)
+AnnotationAssertion(skos:definition :0001003 "A legal act in which a body with legislative authority establishes legal content of general application."@en)
+SubClassOf(:0001003 :0001000)
+SubClassOf(:0001003 ObjectSomeValuesFrom(:0001100 :0001001))
+
+Declaration(Class(:0001004))
+AnnotationAssertion(rdfs:label :0001004 "contract formation"@en)
+AnnotationAssertion(skos:definition :0001004 "A legal act in which two or more parties establish legal content that binds them to one another."@en)
+SubClassOf(:0001004 :0001000)
+SubClassOf(:0001004 ObjectSomeValuesFrom(:0001100 :0001001))
+
+DisjointClasses(:0001003 :0001004)
+
+# ---------------------------------------------------------------- relations
+
+Declaration(ObjectProperty(:0001100))
+AnnotationAssertion(rdfs:label :0001100 "establishes"@en)
+AnnotationAssertion(skos:definition :0001100 "A relation between a legal act and the legal content that comes into being through that act."@en)
+ObjectPropertyDomain(:0001100 :0001000)
+ObjectPropertyRange(:0001100 :0001001)
+
+Declaration(ObjectProperty(:0001101))
+AnnotationAssertion(rdfs:label :0001101 "established by"@en)
+AnnotationAssertion(skos:definition :0001101 "A relation between legal content and the legal act through which it came into being."@en)
+InverseObjectProperties(:0001100 :0001101)
+
+Declaration(ObjectProperty(:0001102))
+AnnotationAssertion(rdfs:label :0001102 "performed under"@en)
+AnnotationAssertion(skos:definition :0001102 "A relation between a legal act and pre-existing legal content that authorizes or governs it, such as an enabling statute or a rule of procedure."@en)
+ObjectPropertyDomain(:0001102 :0001000)
+ObjectPropertyRange(:0001102 :0001001)
+
+)

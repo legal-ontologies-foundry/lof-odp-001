@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <uri name="https://w3id.org/lof/odp-001/imports/bfo_import.owl" uri="imports/bfo_import.owl"/>
+</catalog>
