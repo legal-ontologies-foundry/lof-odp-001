@@ -1,0 +1,8 @@
+# Negative test for LOF-ODP-001 0.3.0 (proposed). A void act cannot establish legal content:
+# 'establishes' has domain legal act, and void act is disjoint from legal act.
+# Expected: INCONSISTENT under both ODP-003 options.
+@prefix ex:  <https://example.org/lease/> .
+@prefix lof: <https://w3id.org/lof/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+<https://w3id.org/lof/examples/nullity-negative-test.ttl> a owl:Ontology .
+ex:danNotice lof:ODP001_0001100 ex:danNoticeText .
