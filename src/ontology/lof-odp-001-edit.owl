@@ -39,7 +39,7 @@ SubClassOf(:0001001 obo:BFO_0000031)
 Declaration(Class(:0001002))
 AnnotationAssertion(rdfs:label :0001002 "legal document"@en)
 AnnotationAssertion(skos:definition :0001002 "A material entity that is the carrier of some legal content."@en)
-AnnotationAssertion(rdfs:comment :0001002 "BFO placement (LOF-P-004): the particular signed paper, or the particular stored file, is a material entity that carries the content. Digital documents are treated as patterns in material storage media. Note that IAO's 'document' is an information content entity, so it corresponds to legal content here, not to legal document. Legal document corresponds to the Item level in FRBR-based legal standards."@en)
+AnnotationAssertion(rdfs:comment :0001002 "BFO placement (LOF-P-004): the particular signed paper, or the particular stored file, is a material entity that carries the content. Digital documents are treated as patterns in material storage media. Note that IAO's 'document' is an information content entity, so it corresponds to legal content here, not to legal document. Legal document corresponds to the Item level in FRBR-based legal standards. A legal document takes part in a legal act only as its instrument (performed by means of); otherwise it at most evidences the act (evidences)."@en)
 SubClassOf(:0001002 obo:BFO_0000040)
 SubClassOf(:0001002 ObjectSomeValuesFrom(obo:BFO_0000101 :0001001))
 
@@ -56,6 +56,29 @@ SubClassOf(:0001004 :0001000)
 SubClassOf(:0001004 ObjectSomeValuesFrom(:0001100 :0001001))
 
 DisjointClasses(:0001003 :0001004)
+
+Declaration(Class(:0001005))
+AnnotationAssertion(rdfs:label :0001005 "legal norm"@en)
+AnnotationAssertion(skos:definition :0001005 "Legal content that requires, prohibits, or permits some kind of conduct."@en)
+AnnotationAssertion(rdfs:comment :0001005 "The operative provisions of a statute, regulation, contract, or judgment. Legal positions (LOF-ODP-003) are grounded in legal norms. Corresponds to CCO 'process regulation' and its three kinds (process requirement, process prohibition, action permission); see the LOF to CCO bridge."@en)
+AnnotationAssertion(skos:example :0001005 "a lease clause requiring rent to be paid by the first of the month; a statute prohibiting resuscitation of a person with a valid DNR order"@en)
+SubClassOf(:0001005 :0001001)
+
+Declaration(Class(:0001006))
+AnnotationAssertion(rdfs:label :0001006 "legal definition"@en)
+AnnotationAssertion(skos:definition :0001006 "Legal content that states what a term means for the purposes of some other legal content."@en)
+AnnotationAssertion(rdfs:comment :0001006 "Corresponds to CCO 'descriptive information content entity'."@en)
+AnnotationAssertion(skos:example :0001006 "the definitions section of a statute"@en)
+SubClassOf(:0001006 :0001001)
+
+Declaration(Class(:0001007))
+AnnotationAssertion(rdfs:label :0001007 "legal designator"@en)
+AnnotationAssertion(skos:definition :0001007 "Legal content that names or identifies some legal content or legal document, such as a title, a section number, or a citation."@en)
+AnnotationAssertion(rdfs:comment :0001007 "Corresponds to CCO 'designative information content entity'. The natural point of attachment for identifier standards such as Akoma Ntoso eIds and ELI."@en)
+AnnotationAssertion(skos:example :0001007 "'8 U.S.C. 1103(a)(3)'; the short title of an act"@en)
+SubClassOf(:0001007 :0001001)
+
+AnnotationAssertion(rdfs:comment :0001001 "A single body of legal content, such as a statute, typically has legal norms, legal definitions, and legal designators among its parts (BFO 'has continuant part'). It is therefore not itself a norm, a definition, or a designator as a whole."@en)
 
 # ---------------------------------------------------------------- relations
 
@@ -75,5 +98,19 @@ AnnotationAssertion(rdfs:label :0001102 "performed under"@en)
 AnnotationAssertion(skos:definition :0001102 "A relation between a legal act and pre-existing legal content that authorizes or governs it, such as an enabling statute or a rule of procedure."@en)
 ObjectPropertyDomain(:0001102 :0001000)
 ObjectPropertyRange(:0001102 :0001001)
+
+Declaration(ObjectProperty(:0001103))
+AnnotationAssertion(rdfs:label :0001103 "performed by means of"@en)
+AnnotationAssertion(skos:definition :0001103 "A relation between a legal act and a legal document that participates in it as the instrument through which the act is performed, as when a deed is executed or a statutory form is signed before witnesses."@en)
+AnnotationAssertion(rdfs:comment :0001103 "Documents do not act; persons and organizations do. A document related by this relation is an operative (dispositive) instrument: the law makes the writing part of how the act is done. Contrast evidences, which holds of documents that merely record or attest to an act."@en)
+SubObjectPropertyOf(:0001103 obo:BFO_0000057)
+ObjectPropertyDomain(:0001103 :0001000)
+ObjectPropertyRange(:0001103 :0001002)
+
+Declaration(ObjectProperty(:0001104))
+AnnotationAssertion(rdfs:label :0001104 "evidences"@en)
+AnnotationAssertion(skos:definition :0001104 "A relation between a material entity, such as a legal document, and a legal act, legal content, or other entity whose existence or occurrence it records or attests to."@en)
+AnnotationAssertion(rdfs:comment :0001104 "Evidencing is not participation: the evidencing entity may come into existence after the act, and the act may occur with no document at all. Nothing about an act, role, or position may be inferred from the existence of an evidencing document alone. An instrument usually also evidences the act performed by means of it, so the two relations are not disjoint."@en)
+ObjectPropertyDomain(:0001104 obo:BFO_0000040)
 
 )
